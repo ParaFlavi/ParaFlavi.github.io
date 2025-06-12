@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia dos Namorados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffe4e6, #fbcfe8);
+    }
+    .heart {
+      animation: float 4s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-20px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .hidden-player {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+
+  <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-xl max-w-sm text-center">
+    <h1 class="text-3xl font-bold text-pink-600 mb-4">💖 Feliz Dia dos Namorados 💖</h1>
+    <p class="text-gray-700 text-base leading-relaxed mb-4">
+      Feliz dia dos namorados, meu amor. <br />
+      Que essa data seja mais um entre muitos outros que a gente vai comemorar. <br />
+      Eu te amo demais e você é muito especial para mim.
+      Eu te dedico essa musica que eu sei que tu gosta xD.<br>
+      E eu tbm te dedico algumas fotinhas de momentos apenas nossos <3	
+    </p>
+
+    <div class="space-x-2 text-pink-400 text-3xl mb-6">
+      <span class="heart">💘</span>
+      <span class="heart">💓</span>
+      <span class="heart">💗</span>
+    </div>
+
+    <button class="bg-pink-500 text-white px-6 py-2 rounded-full shadow hover:bg-pink-600 transition">
+      Tocar nossa música 🎶
+    </button>
+    <audio src="Musica.mp3"controls></audio>
+    <p id="musicStatus" class="text-pink-600 mt-2 text-sm hidden">Música tocando... 💕</p>
+  </div>
+
+  <!-- Galeria de fotos -->
+  <div class="mt-8 w-full max-w-screen-sm overflow-x-auto flex space-x-4 px-4">
+    <img src="https://i.imgur.com/dEVT5Cr.png" alt="Foto 1" class="rounded-xl w-64 shadow-md flex-shrink-0" />
+    <img src="https://i.imgur.com/N32HpPt.png" alt="Foto 2" class="rounded-xl w-64 shadow-md flex-shrink-0" />
+    <img src="https://i.imgur.com/L3KfqmX.jpeg" alt="Foto 3" class="rounded-xl w-64 shadow-md flex-shrink-0" />
+  </div>
+
+  <!-- Player escondido -->
+  <div class="hidden-player">
+    <div id="player"></div>
+  </div>
+
+  <!-- Carrega API do YouTube e script de controle -->
+  <script>
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        videoId: 'w2HktNeb5cg',
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: 'PL6Wy9wkcTS_d1Z6SkRpCoA3V4Lk6o7uBh'
+        }
+      });
+    }
+
+    function playMusic() {
+      if (player && player.playVideo) {
+        player.playVideo();
+        document.getElementById("musicStatus").classList.remove("hidden");
+      }
+    }
+
+    // Carrega script da API do YouTube
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  </script>
+</body>
+</html>
